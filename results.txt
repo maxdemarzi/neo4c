@@ -1,0 +1,14 @@
+Time to Create Graph of 2000 items, 100000 people, 10000000 total likes: 17.419616 seconds
+============================ Simple Traversal ============================
+Traversals of about 49922816.300000 relationships took: 163.114200 milliseconds to execute each
+Iterations per second: 6.130674
+Iterations: 10
+Count: 499228163
+Traversals per millisecond: 306060.516497
+============================ Property Traversal With Weight ============================
+Traversals of about 49871881.000000 relationships took: 329.851300 milliseconds to execute each
+Iterations per second: 3.031669
+Iterations: 10
+Count: 498718810
+Count2: 503709466
+Traversals per millisecond: 151195.041523

@@ -1,2 +1,8 @@
-# neo4c
+# Neo4c
 Toy Project in memory graph, for shits and giggles, do not use.
+
+Test performance:
+
+    make clean
+    cmake -DCMAKE_BUILD_TYPE=Release
+    ./perf
