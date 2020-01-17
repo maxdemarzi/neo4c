@@ -1,5 +1,5 @@
-#ifndef RAGEDB_RELATIONSHIP_H
-#define RAGEDB_RELATIONSHIP_H
+#ifndef NEO4C_RELATIONSHIP_H
+#define NEO4C_RELATIONSHIP_H
 
 #include "include/m-string.h"
 #include "include/cJSON.h"
@@ -73,4 +73,4 @@ static void relationship_set_nodes_and_type(relationship * obj, int32_t in, int3
     string_set(obj->type, type);
 }
 
-#endif //RAGEDB_RELATIONSHIP_H
+#endif //NEO4C_RELATIONSHIP_H

@@ -1,5 +1,5 @@
-#ifndef RAGEDB_GRAPH_H
-#define RAGEDB_GRAPH_H
+#ifndef NEO4C_GRAPH_H
+#define NEO4C_GRAPH_H
 #include <stdbool.h>
 
 #include "direction.h"
@@ -67,100 +67,100 @@ typedef struct {
 
 } Graph;
 
-Graph* ragedb_open(const char* filename);
-void ragedb_clear(Graph* graph);
-void ragedb_close(Graph* graph);
+Graph* neo4c_open(const char* filename);
+void neo4c_clear(Graph* graph);
+void neo4c_close(Graph* graph);
 
 // Relationship Types
-long long int ragedb_relationship_types_get_count(Graph* graph);
-long long int ragedb_relationship_type_get_count(Graph* graph, char* type);
-void ragedb_relationship_types_get(Graph* graph, char** types);
+long long int neo4c_relationship_types_get_count(Graph* graph);
+long long int neo4c_relationship_type_get_count(Graph* graph, char* type);
+void neo4c_relationship_types_get(Graph* graph, char** types);
 
 // Nodes
-long long int ragedb_node_get_id(Graph* graph, char* label, char* key);
-long long int ragedb_node_add_empty(Graph* graph, char* label, char* key);
-long long int ragedb_node_add(Graph* graph, char* label, char* key, char* properties);
-cJSON ragedb_node_get(Graph* graph, char* label, char* key);
-cJSON ragedb_node_get_by_id(Graph* graph, long long int id);
-bool ragedb_node_remove(Graph* graph, char* label, char* key);
-bool ragedb_node_remove_by_id(Graph* graph, long long int id);
+long long int neo4c_node_get_id(Graph* graph, char* label, char* key);
+long long int neo4c_node_add_empty(Graph* graph, char* label, char* key);
+long long int neo4c_node_add(Graph* graph, char* label, char* key, char* properties);
+cJSON neo4c_node_get(Graph* graph, char* label, char* key);
+cJSON neo4c_node_get_by_id(Graph* graph, long long int id);
+bool neo4c_node_remove(Graph* graph, char* label, char* key);
+bool neo4c_node_remove_by_id(Graph* graph, long long int id);
 
 // Properties
-char* ragedb_property_get_string(cJSON* json, char* property);
-long long int ragedb_property_get_integer(cJSON* json, char* property);
-double ragedb_property_get_double(cJSON* json, char* property);
-cJSON ragedb_property_get_object(cJSON* json, char* property);
+char* neo4c_property_get_string(cJSON* json, char* property);
+long long int neo4c_property_get_integer(cJSON* json, char* property);
+double neo4c_property_get_double(cJSON* json, char* property);
+cJSON neo4c_property_get_object(cJSON* json, char* property);
 
 // Node Properties
-char* ragedb_node_property_get_string(Graph* graph, char* label, char* key, char* property);
-long long int ragedb_node_property_get_integer(Graph* graph, char* label, char* key, char* property);
-double ragedb_node_property_get_double(Graph* graph, char* label, char* key, char* property);
-cJSON ragedb_node_property_get_object(Graph* json, char* label, char* key, char* property);
+char* neo4c_node_property_get_string(Graph* graph, char* label, char* key, char* property);
+long long int neo4c_node_property_get_integer(Graph* graph, char* label, char* key, char* property);
+double neo4c_node_property_get_double(Graph* graph, char* label, char* key, char* property);
+cJSON neo4c_node_property_get_object(Graph* json, char* label, char* key, char* property);
 
-bool ragedb_node_property_set_string(Graph* graph, char* label, char* key, char* property, char* value);
-bool ragedb_node_property_set_string_by_id(Graph* graph, long long int id, char* property, char* value);
-bool ragedb_node_property_set_integer(Graph* graph, char* label, char* key, char* property, long long int value);
-bool ragedb_node_property_set_integer_by_id(Graph* graph, long long int id, char* property, long long int value);
-bool ragedb_node_property_set_double(Graph* graph, char* label, char* key, char* property, double value);
-bool ragedb_node_property_set_double_by_id(Graph* graph, long long int id, char* property, double value);
-bool ragedb_node_property_set_object(Graph* graph, char* label, char* key, char* property, char* value);
-bool ragedb_node_property_set_object_by_id(Graph* graph, long long int id, char* property, char* value);
+bool neo4c_node_property_set_string(Graph* graph, char* label, char* key, char* property, char* value);
+bool neo4c_node_property_set_string_by_id(Graph* graph, long long int id, char* property, char* value);
+bool neo4c_node_property_set_integer(Graph* graph, char* label, char* key, char* property, long long int value);
+bool neo4c_node_property_set_integer_by_id(Graph* graph, long long int id, char* property, long long int value);
+bool neo4c_node_property_set_double(Graph* graph, char* label, char* key, char* property, double value);
+bool neo4c_node_property_set_double_by_id(Graph* graph, long long int id, char* property, double value);
+bool neo4c_node_property_set_object(Graph* graph, char* label, char* key, char* property, char* value);
+bool neo4c_node_property_set_object_by_id(Graph* graph, long long int id, char* property, char* value);
 
-bool ragedb_node_property_delete(Graph* graph, char* label, char* key, char* property);
-bool ragedb_node_property_delete_by_id(Graph* graph, long long int id, char* property);
+bool neo4c_node_property_delete(Graph* graph, char* label, char* key, char* property);
+bool neo4c_node_property_delete_by_id(Graph* graph, long long int id, char* property);
 
-bool ragedb_node_properties_set(Graph* graph, char* label, char* key, char* value);
-bool ragedb_node_properties_set_by_id(Graph* graph, long long int id, char* value);
-bool ragedb_node_properties_delete(Graph* graph, char* label, char* key);
-bool ragedb_node_properties_delete_by_id(Graph* graph, long long int id);
+bool neo4c_node_properties_set(Graph* graph, char* label, char* key, char* value);
+bool neo4c_node_properties_set_by_id(Graph* graph, long long int id, char* value);
+bool neo4c_node_properties_delete(Graph* graph, char* label, char* key);
+bool neo4c_node_properties_delete_by_id(Graph* graph, long long int id);
 
 // Relationships
-long long int ragedb_relationship_add_empty(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2);
-long long int ragedb_relationship_add(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties);
-long long int ragedb_relationship_add_with_weights(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties, float weight1, float weight2);
-bool ragedb_relationship_remove_by_id(Graph* graph, long long int id);
-cJSON ragedb_relationship_get_by_id(Graph* graph, long long int id);
+long long int neo4c_relationship_add_empty(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2);
+long long int neo4c_relationship_add(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties);
+long long int neo4c_relationship_add_with_weights(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties, float weight1, float weight2);
+bool neo4c_relationship_remove_by_id(Graph* graph, long long int id);
+cJSON neo4c_relationship_get_by_id(Graph* graph, long long int id);
 
 // Relationship Properties
-char* ragedb_relationship_property_get_string(Graph* graph, long long int id, char* property);
-long long int ragedb_relationship_property_get_integer(Graph* graph, long long int id, char* property);
-double ragedb_relationship_property_get_double(Graph* graph, long long int id, char* property);
-cJSON ragedb_relationship_property_get_object(Graph* graph, long long int id, char* property);
-const char * ragedb_relationship_get_type(Graph* graph, long long int id);
-uint32_t ragedb_relationship_get_starting_node_id(Graph* graph, long long int id);
-uint32_t ragedb_relationship_get_ending_node_id(Graph* graph, long long int id);
+char* neo4c_relationship_property_get_string(Graph* graph, long long int id, char* property);
+long long int neo4c_relationship_property_get_integer(Graph* graph, long long int id, char* property);
+double neo4c_relationship_property_get_double(Graph* graph, long long int id, char* property);
+cJSON neo4c_relationship_property_get_object(Graph* graph, long long int id, char* property);
+const char * neo4c_relationship_get_type(Graph* graph, long long int id);
+uint32_t neo4c_relationship_get_starting_node_id(Graph* graph, long long int id);
+uint32_t neo4c_relationship_get_ending_node_id(Graph* graph, long long int id);
 
-bool ragedb_relationship_property_set_string(Graph* graph, long long int id, char* property, char* value);
-bool ragedb_relationship_property_set_integer(Graph* graph, long long int id, char* property, long long int value);
-bool ragedb_relationship_property_set_double(Graph* graph, long long int id, char* property, double value);
-bool ragedb_relationship_property_set_object(Graph* graph, long long int id, char* property, char* value);
+bool neo4c_relationship_property_set_string(Graph* graph, long long int id, char* property, char* value);
+bool neo4c_relationship_property_set_integer(Graph* graph, long long int id, char* property, long long int value);
+bool neo4c_relationship_property_set_double(Graph* graph, long long int id, char* property, double value);
+bool neo4c_relationship_property_set_object(Graph* graph, long long int id, char* property, char* value);
 
-bool ragedb_relationship_property_delete(Graph* graph, long long int id, char* property);
+bool neo4c_relationship_property_delete(Graph* graph, long long int id, char* property);
 
-bool ragedb_relationship_properties_set(Graph* graph, long long int id, char* value);
-bool ragedb_relationship_properties_delete(Graph* graph, long long int id);
+bool neo4c_relationship_properties_set(Graph* graph, long long int id, char* value);
+bool neo4c_relationship_properties_delete(Graph* graph, long long int id);
 
 // Node Degree
 // Comma delimited types ex. "FRIENDS,ENEMIES"
-long long int ragedb_node_get_degree(Graph* graph, char* label, char* key, enum direction direction, char* types);
+long long int neo4c_node_get_degree(Graph* graph, char* label, char* key, enum direction direction, char* types);
 
 // Traversing
-array_ids_t* ragedb_node_get_outgoing(Graph* graph, char* type, char* label, char* key);
-array_ids_t* ragedb_node_get_outgoing_by_id(Graph* graph, char* type, long long int id);
-array_ids_t* ragedb_node_get_incoming(Graph* graph, char* type, char* label, char* key);
-array_ids_t* ragedb_node_get_incoming_by_id(Graph* graph, char* type, long long int id);
+array_ids_t* neo4c_node_get_outgoing(Graph* graph, char* type, char* label, char* key);
+array_ids_t* neo4c_node_get_outgoing_by_id(Graph* graph, char* type, long long int id);
+array_ids_t* neo4c_node_get_incoming(Graph* graph, char* type, char* label, char* key);
+array_ids_t* neo4c_node_get_incoming_by_id(Graph* graph, char* type, long long int id);
 
-array_combination_t* ragedb_node_get_weighted_outgoing(Graph* graph, char* type, char* label, char* key);
-array_combination_t* ragedb_node_get_weighted_outgoing_by_id(Graph* graph, char* type, long long int id);
-array_combination_t* ragedb_node_get_weighted_incoming(Graph* graph, char* type, char* label, char* key);
-array_combination_t* ragedb_node_get_weighted_incoming_by_id(Graph* graph, char* type, long long int id);
+array_combination_t* neo4c_node_get_weighted_outgoing(Graph* graph, char* type, char* label, char* key);
+array_combination_t* neo4c_node_get_weighted_outgoing_by_id(Graph* graph, char* type, long long int id);
+array_combination_t* neo4c_node_get_weighted_incoming(Graph* graph, char* type, char* label, char* key);
+array_combination_t* neo4c_node_get_weighted_incoming_by_id(Graph* graph, char* type, long long int id);
 
 
 // Extras
 // This is going to limit us to 4B nodes and 4B relationships
-roaring_uint32_iterator_t* ragedb_all_get_node_ids(Graph* graph);
-roaring_uint32_iterator_t* ragedb_all_get_node_ids_with_label(Graph* graph, char* label);
-roaring_uint32_iterator_t* ragedb_all_get_relationship_ids(Graph* graph);
-roaring_uint32_iterator_t* ragedb_all_get_relationship_ids_with_type(Graph* graph, char* type);
+roaring_uint32_iterator_t* neo4c_all_get_node_ids(Graph* graph);
+roaring_uint32_iterator_t* neo4c_all_get_node_ids_with_label(Graph* graph, char* label);
+roaring_uint32_iterator_t* neo4c_all_get_relationship_ids(Graph* graph);
+roaring_uint32_iterator_t* neo4c_all_get_relationship_ids_with_type(Graph* graph, char* type);
 
-#endif //RAGEDB_GRAPH_H
+#endif //NEO4C_GRAPH_H

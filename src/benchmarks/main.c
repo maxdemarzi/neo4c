@@ -27,15 +27,15 @@ void property_traversal_with_weight() {
         int random_person = rand()%((person_count));
         snprintf(buf, 12, "person%d", random_person);
 
-        for M_EACH(item, *ragedb_node_get_weighted_outgoing(graph, "LIKES", "Person", buf), array_combination_t) {
+        for M_EACH(item, *neo4c_node_get_weighted_outgoing(graph, "LIKES", "Person", buf), array_combination_t) {
                         count2++;
                         if (item->weight1>weight_check) {
-                            for M_EACH(person, *ragedb_node_get_weighted_incoming_by_id(graph, "LIKES", item->node_id),
+                            for M_EACH(person, *neo4c_node_get_weighted_incoming_by_id(graph, "LIKES", item->node_id),
                                         array_combination_t) {
                                             count2++;
                                             if (person->weight1>weight_check) {
                                                 for M_EACH(other_item,
-                                                            *ragedb_node_get_weighted_outgoing_by_id(graph, "LIKES",
+                                                            *neo4c_node_get_weighted_outgoing_by_id(graph, "LIKES",
                                                                     person->node_id), array_combination_t) {
                                                                 count2++;
                                                                 if (other_item->weight1 > weight_check) {
@@ -79,9 +79,9 @@ void simple_traversal() {
         int random_person = rand()%((person_count));
         snprintf(buf, 12, "person%d", random_person);
 
-        for M_EACH(item, *ragedb_node_get_weighted_outgoing(graph, "LIKES", "Person", buf), array_combination_t) {
-            for M_EACH(person, *ragedb_node_get_weighted_incoming_by_id(graph, "LIKES", item->node_id), array_combination_t) {
-                for M_EACH(other_item,*ragedb_node_get_weighted_outgoing_by_id(graph, "LIKES", person->node_id), array_combination_t) {
+        for M_EACH(item, *neo4c_node_get_weighted_outgoing(graph, "LIKES", "Person", buf), array_combination_t) {
+            for M_EACH(person, *neo4c_node_get_weighted_incoming_by_id(graph, "LIKES", item->node_id), array_combination_t) {
+                for M_EACH(other_item,*neo4c_node_get_weighted_outgoing_by_id(graph, "LIKES", person->node_id), array_combination_t) {
                     count++;
                     }
             }
@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
 
     // Initialize the Graph
     graph = malloc(sizeof(Graph));
-    ragedb_clear(graph);
+    neo4c_clear(graph);
 
     // Create Nodes and Relationships
     char buf[12];
@@ -119,20 +119,20 @@ int main(int argc, char** argv) {
 
     for (int i = 0; i<item_count; i++) {
         snprintf(buf, 12, "item%d", i);
-        ragedb_node_add_empty(graph, "Item", buf);
+        neo4c_node_add_empty(graph, "Item", buf);
         memset(buf,0,sizeof(buf));
     }
     long long int likes = 0;
     for (int i = 0; i<person_count; i++) {
         snprintf(buf, 12, "person%d", i);
-        ragedb_node_add_empty(graph, "Person", buf);
+        neo4c_node_add_empty(graph, "Person", buf);
         for (int j = 0; j<likes_count; j++) {
             int random_item = rand() % ((item_count+1));
             int random_weight = 1 + (rand() % 10);
             int random_weight_2 = 1 + (rand() % 10);
             snprintf(buf2, 12, "item%d", random_item);
             snprintf(buf3, 20, "{ \"weight\": %d }", random_weight);
-            ragedb_relationship_add_with_weights(graph, "LIKES", "Person", buf, "Item", buf2, buf3, random_weight, random_weight_2);
+            neo4c_relationship_add_with_weights(graph, "LIKES", "Person", buf, "Item", buf2, buf3, random_weight, random_weight_2);
             memset(buf2,0,sizeof(buf2));
             memset(buf3,0,sizeof(buf3));
             likes++;

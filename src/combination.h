@@ -1,5 +1,5 @@
-#ifndef RAGEDB_COMBINATION_H
-#define RAGEDB_COMBINATION_H
+#ifndef NEO4C_COMBINATION_H
+#define NEO4C_COMBINATION_H
 
 #include <cxxabi.h>
 
@@ -59,4 +59,4 @@ static void combination_clear(combination *obj) {
 
 }
 
-#endif //RAGEDB_COMBINATION_H
+#endif //NEO4C_COMBINATION_H

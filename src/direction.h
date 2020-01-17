@@ -1,6 +1,6 @@
-#ifndef RAGEDB_DIRECTION_H
-#define RAGEDB_DIRECTION_H
+#ifndef NEO4C_DIRECTION_H
+#define NEO4C_DIRECTION_H
 
 enum direction { ALL, IN, OUT };
 
-#endif //RAGEDB_DIRECTION_H
+#endif //NEO4C_DIRECTION_H

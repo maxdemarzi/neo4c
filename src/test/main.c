@@ -12,6 +12,6 @@
 int main(int argc, const char* argv[]) {
   int result = ctest_main(argc, argv);
 
-  printf("\nRageDB Tests Complete!\n");
+  printf("\nNeo4c Tests Complete!\n");
   return result;
 }
