@@ -6,7 +6,8 @@
 // As seen on https://miteshpatekar.wordpress.com/2014/10/18/how-to-build-a-cpu-benchmarking-tool-in-c/
 
 Graph* graph;
-int iterations = 10, item_count = 2000, person_count = 100000, likes_count = 100, weight_check = -1;
+int iterations = 10, item_count = 2000, person_count = 100000, likes_count = 100;
+double weight_check = -1.0;
 
 void property_traversal_with_weight() {
     printf("\n============================ Property Traversal With Weight ============================");
@@ -28,24 +29,24 @@ void property_traversal_with_weight() {
         snprintf(buf, 12, "person%d", random_person);
 
         for M_EACH(item, *neo4c_node_get_weighted_outgoing(graph, "LIKES", "Person", buf), array_combination_t) {
-                        count2++;
-                        if (item->weight1>weight_check) {
-                            for M_EACH(person, *neo4c_node_get_weighted_incoming_by_id(graph, "LIKES", item->node_id),
-                                        array_combination_t) {
-                                            count2++;
-                                            if (person->weight1>weight_check) {
-                                                for M_EACH(other_item,
-                                                            *neo4c_node_get_weighted_outgoing_by_id(graph, "LIKES",
-                                                                    person->node_id), array_combination_t) {
-                                                                count2++;
-                                                                if (other_item->weight1 > weight_check) {
-                                                                    count++;
-                                                                }
-                                                            }
-                                            }
+                count2++;
+                if (item->weight1>weight_check) {
+                    for M_EACH(person, *neo4c_node_get_weighted_incoming_by_id(graph, "LIKES", item->node_id),
+                        array_combination_t) {
+                            count2++;
+                            if (person->weight1>weight_check) {
+                                for M_EACH(other_item,
+                                    *neo4c_node_get_weighted_outgoing_by_id(graph, "LIKES",
+                                            person->node_id), array_combination_t) {
+                                        count2++;
+                                        if (other_item->weight1 > weight_check) {
+                                            count++;
                                         }
+                                    }
+                            }
                         }
-                    }
+                }
+            }
     }
     end = clock();
     long double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
