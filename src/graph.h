@@ -117,7 +117,7 @@ bool neo4c_node_properties_delete_by_id(Graph* graph, long long int id);
 // Relationships
 long long int neo4c_relationship_add_empty(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2);
 long long int neo4c_relationship_add(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties);
-long long int neo4c_relationship_add_with_weights(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties, float weight1, float weight2);
+long long int neo4c_relationship_add_with_weights(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties, double weight1, double weight2);
 bool neo4c_relationship_remove_by_id(Graph* graph, long long int id);
 cJSON neo4c_relationship_get_by_id(Graph* graph, long long int id);
 

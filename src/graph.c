@@ -202,11 +202,6 @@ bool neo4c_node_remove_by_id(Graph* graph, long long int id) {
 
     roaring_bitmap_add(graph->deleted_nodes, id);
 
-//    combination* rel_check_combination = malloc(sizeof(combination));
-//    combination_init(rel_check_combination);
-//    ids* rel_check_ids = malloc(sizeof(ids));
-//    ids_init(rel_check_ids);
-
     // Remove Outgoing Relationships
     str_2_either_t* relationships_map = relationships_get(graph->outgoing_relationships, id);
     str_2_either_it_t it;
@@ -365,8 +360,6 @@ bool neo4c_node_remove_by_id(Graph* graph, long long int id) {
             str_2_long_set_at(graph->relationship_counts, current->key, *count);
 
         }
-//        free(rel_check_combination);
-//        free(rel_check_ids);
     }
 
     return true;
@@ -549,7 +542,7 @@ long long int neo4c_relationship_add(Graph* graph, char* type, char* label1, cha
     return relId;
 }
 
-long long int neo4c_relationship_add_with_weights(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties, float weight1, float weight2) {
+long long int neo4c_relationship_add_with_weights(Graph* graph, char* type, char* label1, char* key1, char* label2, char* key2, char* properties, double weight1, double weight2) {
     // Get the node ids
     long long int node1Id = neo4c_node_get_id(graph, label1, key1);
     long long int node2Id = neo4c_node_get_id(graph, label2, key2);
@@ -740,182 +733,6 @@ bool neo4c_relationship_remove_by_id(Graph* graph, long long int id) {
 
     return true;
 }
-
-//array_long_t* neo4c_node_get_outgoing_node_ids(Graph* graph, char* type, char* label, char* key) {
-//    // Get the node ids
-//    long long int nodeId = neo4c_node_get_id(graph, label, key);
-//    if (nodeId==-1) {
-//        return &graph->empty_list;
-//    }
-//    else {
-//        return neo4c_node_get_outgoing_node_ids_by_id(graph, type, nodeId);
-//    }
-//}
-//
-//array_long_t* neo4c_node_get_outgoing_node_ids_by_id(Graph* graph, char* type, long long int id) {
-//    // If node id is greater than number of nodes
-//    long long int max_id = array_json_size(graph->nodes);
-//    if (id > max_id) {
-//        return &graph->empty_list;
-//    }
-//    // If node id has been deleted
-//    if (roaring_bitmap_contains(graph->deleted_nodes, id)) {
-//        return &graph->empty_list;
-//    }
-//
-//    // Initialize Type
-//    string_t type_string;
-//    string_init(type_string);
-//    string_set_str(type_string, type);
-//
-//    str_2_either_t* relationships = relationships_get(graph->outgoing_relationships, id);
-//    array_combination_t* existing = str_2_either_get(*relationships, type_string);
-//    string_clear(type_string);
-//    if (existing==NULL) {
-//        return &graph->empty_list;
-//    }
-//    array_long_t node_ids;
-//    array_long_init(node_ids);
-//    for M_EACH(combo, *existing, array_combination_t) {
-//                    array_long_push_back(node_ids, combo->node_id);
-//                }
-//
-//    return node_ids;
-//}
-//
-//array_long_t* neo4c_node_get_incoming_node_ids(Graph* graph, char* type, char* label, char* key) {
-//    // Get the node id
-//    long long int nodeId = neo4c_node_get_id(graph, label, key);
-//    // If not found return a empty list.
-//    if (nodeId==-1) {
-//        return &graph->empty_list;
-//    }
-//    else {
-//        // Otherwise use node id to get list of node ids
-//        return neo4c_node_get_incoming_node_ids_by_id(graph, type, nodeId);
-//    }
-//}
-//
-//array_long_t* neo4c_node_get_incoming_node_ids_by_id(Graph* graph, char* type, long long int id) {
-//    // If node id is greater than number of nodes
-//    long long int max_id = array_json_size(graph->nodes);
-//    if (id > max_id) {
-//        return &graph->empty_list;
-//    }
-//    // If node id has been deleted
-//    if (roaring_bitmap_contains(graph->deleted_nodes, id)) {
-//        return &graph->empty_list;
-//    }
-//
-//    // Initialize Type
-//    string_t type_string;
-//    string_init(type_string);
-//    string_set_str(type_string, type);
-//
-//    str_2_either_t* relationships = relationships_get(graph->incoming_relationships, id);
-//    array_combination_t * existing = str_2_either_get(*relationships, type_string);
-//    string_clear(type_string);
-//    if (existing==NULL) {
-//        return &graph->empty_list;
-//    }
-//
-//    array_long_t node_ids;
-//    array_long_init(node_ids);
-//    for M_EACH(combo, *existing, array_combination_t) {
-//        array_long_push_back(node_ids, combo->node_id);
-//    }
-//
-//    return node_ids;
-//}
-//
-//array_long_t* neo4c_node_get_outgoing_relationship_ids(Graph* graph, char* type, char* label, char* key) {
-//    // Get the node id
-//    long long int nodeId = neo4c_node_get_id(graph, label, key);
-//    if (nodeId==-1) {
-//        return &graph->empty_list;
-//    }
-//    else {
-//        // Otherwise use node id to get list of relationship ids
-//        return neo4c_node_get_outgoing_relationship_ids_by_id(graph, type, nodeId);
-//    }
-//}
-//
-//array_long_t* neo4c_node_get_outgoing_relationship_ids_by_id(Graph* graph, char* type, long long int id) {
-//    // If node id is greater than number of nodes
-//    long long int max_id = array_json_size(graph->nodes);
-//    if (id > max_id) {
-//        return &graph->empty_list;
-//    }
-//    // If node id has been deleted
-//    if (roaring_bitmap_contains(graph->deleted_nodes, id)) {
-//        return &graph->empty_list;
-//    }
-//
-//    // Initialize Type
-//    string_t type_string;
-//    string_init(type_string);
-//    string_set_str(type_string, type);
-//
-//    str_2_either_t* relationships = relationships_get(graph->outgoing_relationships, id);
-//    array_combination_t * existing = str_2_either_get(*relationships, type_string);
-//    string_clear(type_string);
-//    if (existing==NULL) {
-//        return &graph->empty_list;
-//    }
-//
-//    array_long_t node_ids;
-//    array_long_init(node_ids);
-//    for M_EACH(combo, *existing, array_combination_t) {
-//                    array_long_push_back(node_ids, combo->node_id);
-//                }
-//
-//    return node_ids;
-//}
-//
-//array_long_t* neo4c_node_get_incoming_relationship_ids(Graph* graph, char* type, char* label, char* key) {
-//    // Get the node id
-//    long long int nodeId = neo4c_node_get_id(graph, label, key);
-//    // If not found return a empty list.
-//    if (nodeId==-1) {
-//        return &graph->empty_list;
-//    }
-//    else {
-//        // Otherwise use node id to get list of relationship ids
-//        return neo4c_node_get_incoming_relationship_ids_by_id(graph, type, nodeId);
-//    }
-//}
-//
-//array_long_t* neo4c_node_get_incoming_relationship_ids_by_id(Graph* graph, char* type, long long int id) {
-//    // If node id is greater than number of nodes
-//    long long int max_id = array_json_size(graph->nodes);
-//    if (id > max_id) {
-//        return &graph->empty_list;
-//    }
-//    // If node id has been deleted
-//    if (roaring_bitmap_contains(graph->deleted_nodes, id)) {
-//        return &graph->empty_list;
-//    }
-//
-//    // Initialize Type
-//    string_t type_string;
-//    string_init(type_string);
-//    string_set_str(type_string, type);
-//
-//    str_2_either_t* relationships = relationships_get(graph->incoming_relationships, id);
-//    array_combination_t * existing = str_2_either_get(*relationships, type_string);
-//    string_clear(type_string);
-//    if (existing==NULL) {
-//        return &graph->empty_list;
-//    }
-//
-//    array_long_t node_ids;
-//    array_long_init(node_ids);
-//    for M_EACH(combo, *existing, array_combination_t) {
-//                    array_long_push_back(node_ids, combo->rel_id);
-//                }
-//
-//    return node_ids;
-//}
 
 array_ids_t* neo4c_node_get_outgoing(Graph* graph, char* type, char* label, char* key) {
     // Get the node id

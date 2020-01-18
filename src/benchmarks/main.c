@@ -128,10 +128,10 @@ int main(int argc, char** argv) {
         neo4c_node_add_empty(graph, "Person", buf);
         for (int j = 0; j<likes_count; j++) {
             int random_item = rand() % ((item_count+1));
-            int random_weight = 1 + (rand() % 10);
-            int random_weight_2 = 1 + (rand() % 10);
+            double random_weight =  (10.0) * ( (double)rand() / (double)RAND_MAX );
+            double random_weight_2 =  (10.0) * ( (double)rand() / (double)RAND_MAX );
             snprintf(buf2, 12, "item%d", random_item);
-            snprintf(buf3, 20, "{ \"weight\": %d }", random_weight);
+            snprintf(buf3, 20, "{ \"weight\": %lf }", random_weight);
             neo4c_relationship_add_with_weights(graph, "LIKES", "Person", buf, "Item", buf2, buf3, random_weight, random_weight_2);
             memset(buf2,0,sizeof(buf2));
             memset(buf3,0,sizeof(buf3));

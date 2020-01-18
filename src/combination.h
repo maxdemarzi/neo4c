@@ -30,15 +30,15 @@ static void ids_clear(ids *obj) {
 typedef struct Combination {
   uint32_t node_id;
   uint32_t rel_id;
-  float weight1;
-  float weight2;
+  double weight1;
+  double weight2;
 } combination;
 
 static void combination_init(combination* obj) {
     obj->node_id = 0;
     obj->rel_id = 0;
-    obj->weight1 = -1.0f;
-    obj->weight2 = -1.0f;
+    obj->weight1 = -1.0;
+    obj->weight2 = -1.0;
 }
 
 static void combination_init_set(combination *obj, const combination src) {
