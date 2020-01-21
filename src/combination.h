@@ -1,8 +1,6 @@
 #ifndef NEO4C_COMBINATION_H
 #define NEO4C_COMBINATION_H
 
-#include <cxxabi.h>
-
 typedef struct Ids {
   uint32_t node_id;
   uint32_t rel_id;
