@@ -1,3 +1,10 @@
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+perf
+test
+
 # File System Junk
 .DS_Store
 
